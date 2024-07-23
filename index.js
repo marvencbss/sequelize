@@ -16,4 +16,6 @@
     })
     console.log(resultadoCreate);
 
+    const usuarios = await Usuario.findAll();
+    console.log(usuarios);
 })();
