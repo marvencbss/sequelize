@@ -21,7 +21,21 @@ const Usuario = database.define('usuario', {
         allowNull: false
     }
     }, {
-    timestamps: false
+    timestamps: true,
+    hooks: {
+        beforeCreate: (user, options) => {
+            const now = new Date();
+            const threeHoursLater = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+            user.createdAt = threeHoursLater;
+            user.updateAt = threeHoursLater;
+        },
+        beforeUpdate: (user, options) => {
+            const now = new Date();
+            const threeHoursLater = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+            user.updateAt= threeHoursLater;
+        }
+    }
+
 })
 
 module.exports = Usuario
